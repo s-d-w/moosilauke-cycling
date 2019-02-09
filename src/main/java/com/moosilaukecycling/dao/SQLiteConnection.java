@@ -8,23 +8,27 @@ import java.sql.DriverManager;
 
 public class SQLiteConnection {
 
-    private static Connection connection = null;
+    private SQLiteConnection() { }
 
-    static {
-        try {
-            Class.forName("org.sqlite.JDBC");
-            SQLiteConfig config = new SQLiteConfig();
-            config.setOpenMode(SQLiteOpenMode.FULLMUTEX);
-            connection = DriverManager.getConnection("jdbc:sqlite:src/main/resources/sqlite/test.db", config.toProperties());
-            // ensure schema exists
-        } catch (Exception e) {
-            System.err.println(e.getClass().getName() + ": " + e.getMessage());
-            System.exit(1);
-        }
-    }
+    private volatile static Connection connection;
 
     public static Connection getConnection() {
+        if (connection == null) {
+            synchronized (SQLiteConnection.class) {
+                if (connection == null) {
+                    try {
+                        Class.forName("org.sqlite.JDBC");
+                        SQLiteConfig config = new SQLiteConfig();
+                        config.setOpenMode(SQLiteOpenMode.FULLMUTEX);
+                        connection = DriverManager.getConnection("jdbc:sqlite:src/main/resources/sqlite/test.db", config.toProperties());
+                        // ensure schema exists
+                    } catch (Exception e) {
+                        System.err.println(e.getClass().getName() + ": " + e.getMessage());
+                        System.exit(1);
+                    }
+                }
+            }
+        }
         return connection;
     }
-
 }
