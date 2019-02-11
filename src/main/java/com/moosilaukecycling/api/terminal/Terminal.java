@@ -8,7 +8,7 @@ public class Terminal {
 
     private static final String EXIT = "q";
 
-    BufferedReader bufferedReader;
+    private BufferedReader bufferedReader;
 
     public Terminal() {
         this.bufferedReader = new BufferedReader(new InputStreamReader(System.in));
@@ -33,7 +33,7 @@ public class Terminal {
                 break;
             }
 
-            if (input.toLowerCase().equals(EXIT)) {
+            if (EXIT.equals(input.toLowerCase())) {
                 System.out.println("Quiting.");
                 break;
             }
