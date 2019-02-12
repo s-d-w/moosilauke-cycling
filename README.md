@@ -1,4 +1,4 @@
-###Moosilauke Cycling
+### Moosilauke Cycling
 
 ##### An example application demonstrating a bunch of different concepts in software engineering. No real point other than to have some kind of a context to work with.
 
@@ -8,7 +8,9 @@ Concepts:
 
 
 ### Setup
-Install gradle with: brew install gradle
+Install gradle with: 
+
+    brew install gradle
 
 If you don't want to install gradle, you can use the included gradle wrapper.
 Just type:
