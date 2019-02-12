@@ -25,12 +25,10 @@ public class RepairJobServiceTests {
     }
 
     @Test
-    // just creates a bunch of jobs within 30 seconds
+    // just runs a bunch of jobs for up to 30 seconds
     public void testRepairJobServiceCreate() throws InterruptedException {
-        RepairJobRequest repairJobRequest = new RepairJobRequest("TUNEUP", "some notes");
-        repairJobService.createRepairJob(repairJobRequest);
-
-        Stream.generate(this::generateRepairJobRequest).limit(20L)
+        Stream.generate(this::generateRepairJobRequest)
+                .limit(15L)
                 .forEach(repairJobService::createRepairJob);
 
         sleep(30000L);
