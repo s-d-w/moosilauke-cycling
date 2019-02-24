@@ -30,6 +30,7 @@ public abstract class Bike implements Repairable {
     Bike() { }
 
     abstract static class Builder<T extends Builder<T>> {
+
         UUID id;
         String make;
         String model;
@@ -80,16 +81,11 @@ public abstract class Bike implements Repairable {
         size = builder.size;
         year = builder.year;
         bikeType = builder.bikeType;
-        frame = builder.bikePartFactory.createFrame(bikeType);
-        groupSet = builder.bikePartFactory.createGroupSet(bikeType);
-        handleBars = builder.bikePartFactory.createHandleBars(bikeType);
-        wheelSet = builder.bikePartFactory.createWheelSet(bikeType);
-        saddle = builder.bikePartFactory.createSaddle(bikeType);
-        frame = builder.frame != null ? builder.frame : frame;
-        groupSet = builder.groupSet != null ? builder.groupSet : groupSet;
-        handleBars = builder.handleBars != null ? builder.handleBars : handleBars;
-        saddle = builder.saddle != null ? builder.saddle : saddle;
-        wheelSet = builder.wheelSet != null ? builder.wheelSet : wheelSet;
+        frame = builder.frame != null ? builder.frame : builder.bikePartFactory.createFrame(bikeType);
+        groupSet = builder.groupSet != null ? builder.groupSet : builder.bikePartFactory.createGroupSet(bikeType);
+        handleBars = builder.handleBars != null ? builder.handleBars : builder.bikePartFactory.createHandleBars(bikeType);
+        saddle = builder.saddle != null ? builder.saddle : builder.bikePartFactory.createSaddle(bikeType);
+        wheelSet = builder.wheelSet != null ? builder.wheelSet : builder.bikePartFactory.createWheelSet(bikeType);
     }
 
     public List<BikePart> getBikeParts() {
