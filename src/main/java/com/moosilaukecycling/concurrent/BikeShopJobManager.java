@@ -50,7 +50,7 @@ public class BikeShopJobManager {
                 } else {
                     MAX_SUBMITTED_THREADS.release();
                 }
-            } catch (InterruptedException e) {
+            } catch (Exception e) {
                 throw new RuntimeException(e);
             }
         }

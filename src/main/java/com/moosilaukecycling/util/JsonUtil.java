@@ -8,6 +8,8 @@ import java.io.IOException;
 
 public class JsonUtil {
 
+    private JsonUtil() { }
+
     private static final ObjectMapper MAPPER = new ObjectMapper();
 
     public static JsonNode toJson(Object object) {

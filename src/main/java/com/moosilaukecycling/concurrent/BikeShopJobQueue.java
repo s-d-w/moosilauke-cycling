@@ -1,30 +1,35 @@
 package com.moosilaukecycling.concurrent;
 
-import java.util.Deque;
-import java.util.List;
+import java.io.IOException;
 import java.util.Optional;
-import java.util.concurrent.ConcurrentLinkedDeque;
 
 public class BikeShopJobQueue {
 
+    private static final MessageQueue<BikeShopJob> queue = new MessageQueue<>();
+
     private BikeShopJobQueue() { }
 
-    private static final Deque<BikeShopJob> deque = new ConcurrentLinkedDeque<>();
-
-    public static boolean submitJob(BikeShopJob job) {
-        return deque.add(job);
-    }
-
-    public static List<BikeShopJob> getJobs(int amount) {
-       throw new UnsupportedOperationException();
+    public static void submitJob(BikeShopJob job) {
+        try {
+            queue.submit(job);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public static Optional<BikeShopJob> getJob() {
-        return Optional.ofNullable(deque.poll());
+        try {
+            return Optional.ofNullable(queue.getMessage());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    public static void returnJob(BikeShopJob job) {
-        deque.addFirst(job);
+    public void returnJob(BikeShopJob job) {
+        try {
+            queue.returnMessage(job);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
-
 }

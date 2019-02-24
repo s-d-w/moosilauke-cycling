@@ -2,7 +2,9 @@ package com.moosilaukecycling.concurrent;
 
 import com.moosilaukecycling.concurrent.worker.WorkerType;
 
-public abstract class BikeShopJob {
+import java.io.Serializable;
+
+public abstract class BikeShopJob implements Serializable {
 
     protected WorkerType workerType;
 
