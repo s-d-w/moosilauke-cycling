@@ -1,6 +1,6 @@
 package com.moosilaukecycling.domain;
 
-import com.moosilaukecycling.domain.bikeparts.WheelSet;
+import com.moosilaukecycling.domain.bikeparts.*;
 import com.moosilaukecycling.domain.enums.BikeType;
 import com.moosilaukecycling.domain.factory.BikePartFactory;
 
@@ -21,16 +21,37 @@ public class TimeTrialBike extends Bike {
 
     private TimeTrialBike(Builder builder) {
         super(builder);
-        this.wheelSet = builder.wheelSet;
     }
 
     public static class Builder extends Bike.Builder<Builder> {
 
-        WheelSet wheelSet;
-
         public Builder(String make, String model) {
             super(make, model);
             bikeType = BikeType.TIME_TRIAL;
+        }
+
+        public Builder withTimeTrialFrame(Frame frame) {
+            checkNotNull(frame, "Frame cannot be null");
+            this.frame = frame;
+            return this;
+        }
+
+        public Builder withTimeTrialGroupSet(GroupSet groupSet) {
+            checkNotNull(groupSet, "Group Set cannot be null");
+            this.groupSet = groupSet;
+            return this;
+        }
+
+        public Builder withTimeTrialHandleBars(HandleBars handleBars) {
+            checkNotNull(handleBars, "HandleBars cannot be null");
+            this.handleBars = handleBars;
+            return this;
+        }
+
+        public Builder withTimeTrialSaddle(Saddle saddle) {
+            checkNotNull(saddle, "Saddle cannot be null");
+            this.saddle = saddle;
+            return this;
         }
 
         public Builder withTimeTrialWheelSet(WheelSet wheelSet) {

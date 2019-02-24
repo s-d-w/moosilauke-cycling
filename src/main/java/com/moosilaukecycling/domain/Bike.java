@@ -2,6 +2,8 @@ package com.moosilaukecycling.domain;
 
 import com.moosilaukecycling.domain.bikeparts.*;
 import com.moosilaukecycling.domain.enums.BikeType;
+import com.moosilaukecycling.domain.factory.AmericanBikePartFactory;
+import com.moosilaukecycling.domain.factory.BikePartFactory;
 
 import java.util.Arrays;
 import java.util.List;
@@ -35,15 +37,18 @@ public abstract class Bike implements Repairable {
         String year;
         BikeType bikeType;
 
-        // Frame frame;
-        // GroupSet groupSet;
-        // HandleBars handleBars;
-        // Saddle saddle;
-        // WheelSet wheelSet;
+        BikePartFactory bikePartFactory;
+
+        Frame frame;
+        GroupSet groupSet;
+        HandleBars handleBars;
+        Saddle saddle;
+        WheelSet wheelSet;
 
         Builder(String make, String model) {
             this.make = make;
             this.model = model;
+            this.bikePartFactory = new AmericanBikePartFactory();
             this.id = UUID.randomUUID();
         }
 
@@ -57,18 +62,34 @@ public abstract class Bike implements Repairable {
             return self();
         }
 
+        public T withBikePartFactory(BikePartFactory bikePartFactory) {
+            checkNotNull(bikePartFactory, "BikePartFactory cannot be null.");
+            this.bikePartFactory = bikePartFactory;
+            return self();
+        }
+
         abstract Bike build();
 
         protected abstract T self();
     }
 
     Bike(Builder<?> builder) {
-        this.id = builder.id;
-        this.make = builder.make;
-        this.model = builder.model;
-        this.size = builder.size;
-        this.year = builder.year;
-        this.bikeType = builder.bikeType;
+        id = builder.id;
+        make = builder.make;
+        model = builder.model;
+        size = builder.size;
+        year = builder.year;
+        bikeType = builder.bikeType;
+        frame = builder.bikePartFactory.createFrame(bikeType);
+        groupSet = builder.bikePartFactory.createGroupSet(bikeType);
+        handleBars = builder.bikePartFactory.createHandleBars(bikeType);
+        wheelSet = builder.bikePartFactory.createWheelSet(bikeType);
+        saddle = builder.bikePartFactory.createSaddle(bikeType);
+        frame = builder.frame != null ? builder.frame : frame;
+        groupSet = builder.groupSet != null ? builder.groupSet : groupSet;
+        handleBars = builder.handleBars != null ? builder.handleBars : handleBars;
+        saddle = builder.saddle != null ? builder.saddle : saddle;
+        wheelSet = builder.wheelSet != null ? builder.wheelSet : wheelSet;
     }
 
     public List<BikePart> getBikeParts() {

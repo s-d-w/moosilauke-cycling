@@ -1,6 +1,6 @@
 package com.moosilaukecycling.domain;
 
-import com.moosilaukecycling.domain.bikeparts.GroupSet;
+import com.moosilaukecycling.domain.bikeparts.*;
 import com.moosilaukecycling.domain.enums.BikeType;
 import com.moosilaukecycling.domain.factory.BikePartFactory;
 
@@ -21,21 +21,42 @@ public class RoadBike extends Bike {
 
     private RoadBike(Builder builder) {
         super(builder);
-        this.groupSet = builder.groupSet;
     }
 
     public static class Builder extends Bike.Builder<Builder> {
-
-        GroupSet groupSet;
 
         public Builder(String make, String model) {
             super(make, model);
             bikeType = BikeType.RACING;
         }
 
+        public Builder withRacingFrame(Frame frame) {
+            checkNotNull(frame, "Frame cannot be null");
+            this.frame = frame;
+            return this;
+        }
+
         public Builder withRacingGroupSet(GroupSet groupSet) {
             checkNotNull(groupSet, "Group Set cannot be null");
             this.groupSet = groupSet;
+            return this;
+        }
+
+        public Builder withRacingHandlebars(HandleBars handleBars) {
+            checkNotNull(handleBars, "HandleBars cannot be null");
+            this.handleBars = handleBars;
+            return this;
+        }
+
+        public Builder withRacingSaddle(Saddle saddle) {
+            checkNotNull(saddle, "Saddle cannot be null");
+            this.saddle = saddle;
+            return this;
+        }
+
+        public Builder withRacingWheelSet(WheelSet wheelSet) {
+            checkNotNull(wheelSet, "Wheel Set cannot be null");
+            this.wheelSet = wheelSet;
             return this;
         }
 

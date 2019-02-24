@@ -3,7 +3,7 @@
 ##### An example application demonstrating a bunch of different concepts in software engineering. No real point other than to have some kind of a context to work with.
 
 Concepts:
-* design patterns: builder, template method, etc
+* design patterns: builder, template method, factory method, abstract factory, etc
 * asynchronous processing with a worker model
 
 
