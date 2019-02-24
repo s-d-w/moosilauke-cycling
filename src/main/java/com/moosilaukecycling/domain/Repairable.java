@@ -1,6 +1,7 @@
 package com.moosilaukecycling.domain;
 
-public interface Repairable<T> {
+public interface Repairable {
 
-    T repair();
+    void repair();
+
 }

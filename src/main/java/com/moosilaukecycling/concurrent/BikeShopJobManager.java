@@ -45,7 +45,7 @@ public class BikeShopJobManager {
                 Optional<BikeShopJob> jobOptional = BikeShopJobQueue.getJob();
                 if (jobOptional.isPresent()) {
                     Worker worker = workerFactory.createWorker(jobOptional.get().getWorkerType(), workerId.getAndIncrement());
-                    ListenableFuture future = listeningExecutor.submit(worker);
+                    ListenableFuture<?> future = listeningExecutor.submit(worker);
                     Futures.addCallback(future, releasePermit(), MoreExecutors.directExecutor());
                 } else {
                     MAX_SUBMITTED_THREADS.release();

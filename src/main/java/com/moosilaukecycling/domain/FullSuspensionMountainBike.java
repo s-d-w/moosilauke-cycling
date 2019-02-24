@@ -3,12 +3,12 @@ package com.moosilaukecycling.domain;
 import com.moosilaukecycling.domain.enums.BikeType;
 import com.moosilaukecycling.domain.factory.BikePartFactory;
 
-public class CasualBike extends Bike {
+public class FullSuspensionMountainBike extends Bike {
 
-    public CasualBike() { }
+    public FullSuspensionMountainBike() { }
 
-    public CasualBike(BikePartFactory bikePartFactory) {
-        bikeType = BikeType.CASUAL;
+    public FullSuspensionMountainBike(BikePartFactory bikePartFactory) {
+        bikeType = BikeType.FULL_SUSPENSION;
         frame = bikePartFactory.createFrame(bikeType);
         groupSet = bikePartFactory.createGroupSet(bikeType);
         handleBars = bikePartFactory.createHandleBars(bikeType);
@@ -16,7 +16,7 @@ public class CasualBike extends Bike {
         wheelSet = bikePartFactory.createWheelSet(bikeType);
     }
 
-    private CasualBike(Builder builder) {
+    private FullSuspensionMountainBike(Builder builder) {
         super(builder);
     }
 
@@ -24,12 +24,12 @@ public class CasualBike extends Bike {
 
         public Builder(String make, String model) {
             super(make, model);
-            bikeType = BikeType.CASUAL;
+            bikeType = BikeType.FULL_SUSPENSION;
         }
 
         @Override
         public Bike build() {
-            return new CasualBike(this);
+            return new FullSuspensionMountainBike(this);
         }
 
         @Override

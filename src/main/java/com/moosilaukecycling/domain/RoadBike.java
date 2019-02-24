@@ -1,34 +1,46 @@
 package com.moosilaukecycling.domain;
 
+import com.moosilaukecycling.domain.bikeparts.GroupSet;
+import com.moosilaukecycling.domain.enums.BikeType;
+import com.moosilaukecycling.domain.factory.BikePartFactory;
+
+import static com.google.common.base.Preconditions.checkNotNull;
+
 public class RoadBike extends Bike {
 
-    private String roadBikeType;
+    public RoadBike() { }
 
-    public RoadBike(String make, String model, String size, String roadBikeType) {
-        super(make, model, size);
-        this.roadBikeType = roadBikeType;
+    public RoadBike(BikePartFactory bikePartFactory) {
+        bikeType = BikeType.RACING;
+        frame = bikePartFactory.createFrame(bikeType);
+        groupSet = bikePartFactory.createGroupSet(bikeType);
+        handleBars = bikePartFactory.createHandleBars(bikeType);
+        saddle = bikePartFactory.createSaddle(bikeType);
+        wheelSet = bikePartFactory.createWheelSet(bikeType);
     }
 
     private RoadBike(Builder builder) {
         super(builder);
-        this.roadBikeType = builder.roadBikeType;
+        this.groupSet = builder.groupSet;
     }
 
     public static class Builder extends Bike.Builder<Builder> {
 
-        private String roadBikeType;
+        GroupSet groupSet;
 
-        public Builder(String make, String model, String size) {
-            super(make, model, size);
+        public Builder(String make, String model) {
+            super(make, model);
+            bikeType = BikeType.RACING;
         }
 
-        public Builder withRoadBikeType(String roadBikeType) {
-            this.roadBikeType = roadBikeType;
+        public Builder withRacingGroupSet(GroupSet groupSet) {
+            checkNotNull(groupSet, "Group Set cannot be null");
+            this.groupSet = groupSet;
             return this;
         }
 
         @Override
-        public RoadBike build() {
+        public Bike build() {
             return new RoadBike(this);
         }
 
@@ -38,17 +50,8 @@ public class RoadBike extends Bike {
         }
     }
 
-    public String getRoadBikeType() {
-        return roadBikeType;
-    }
-
-    public void setRoadBikeType(String roadBikeType) {
-        this.roadBikeType = roadBikeType;
-    }
-
     @Override
-    public Bike repair() {
-        System.out.println("Repairing: " + make + " " + model);
-        return this;
+    public void repair() {
+        getBikeParts().forEach(Repairable::repair);
     }
 }

@@ -1,14 +1,17 @@
 package com.moosilaukecycling.domain;
 
+import com.moosilaukecycling.domain.bikeparts.WheelSet;
 import com.moosilaukecycling.domain.enums.BikeType;
 import com.moosilaukecycling.domain.factory.BikePartFactory;
 
-public class CasualBike extends Bike {
+import static com.google.common.base.Preconditions.checkNotNull;
 
-    public CasualBike() { }
+public class TimeTrialBike extends Bike {
 
-    public CasualBike(BikePartFactory bikePartFactory) {
-        bikeType = BikeType.CASUAL;
+    public TimeTrialBike() { }
+
+    public TimeTrialBike(BikePartFactory bikePartFactory) {
+        bikeType = BikeType.TIME_TRIAL;
         frame = bikePartFactory.createFrame(bikeType);
         groupSet = bikePartFactory.createGroupSet(bikeType);
         handleBars = bikePartFactory.createHandleBars(bikeType);
@@ -16,20 +19,29 @@ public class CasualBike extends Bike {
         wheelSet = bikePartFactory.createWheelSet(bikeType);
     }
 
-    private CasualBike(Builder builder) {
+    private TimeTrialBike(Builder builder) {
         super(builder);
+        this.wheelSet = builder.wheelSet;
     }
 
     public static class Builder extends Bike.Builder<Builder> {
 
+        WheelSet wheelSet;
+
         public Builder(String make, String model) {
             super(make, model);
-            bikeType = BikeType.CASUAL;
+            bikeType = BikeType.TIME_TRIAL;
+        }
+
+        public Builder withTimeTrialWheelSet(WheelSet wheelSet) {
+            checkNotNull(wheelSet, "Wheel Set cannot be null");
+            this.wheelSet = wheelSet;
+            return this;
         }
 
         @Override
         public Bike build() {
-            return new CasualBike(this);
+            return new TimeTrialBike(this);
         }
 
         @Override
