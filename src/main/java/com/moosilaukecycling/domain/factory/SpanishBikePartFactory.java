@@ -17,7 +17,7 @@ public class SpanishBikePartFactory implements BikePartFactory {
             case TIME_TRIAL:
                 return new TimeTrialFrame("Spanish Time Trial Frame");
             case CASUAL:
-                return new ComfortFrame("Spanish Casual Frame");
+                return new CasualFrame("Spanish Casual Frame");
             case ELECTRIC:
                 return new ElectricFrame("Spanish Electric Frame");
             default:

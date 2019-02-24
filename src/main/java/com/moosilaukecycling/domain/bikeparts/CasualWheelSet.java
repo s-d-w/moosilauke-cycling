@@ -1,8 +1,13 @@
 package com.moosilaukecycling.domain.bikeparts;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
+
+@JsonTypeName(value = "CasualWheelSet")
 public class CasualWheelSet implements WheelSet {
 
     private String wheelSet;
+
+    public CasualWheelSet() { }
 
     public CasualWheelSet(String wheelSet) {
         this.wheelSet = wheelSet;

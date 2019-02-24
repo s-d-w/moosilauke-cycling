@@ -1,8 +1,13 @@
 package com.moosilaukecycling.domain.bikeparts;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
+
+@JsonTypeName("CasualHandleBars")
 public class CasualHandleBars implements HandleBars {
 
     private String handleBars;
+
+    public CasualHandleBars() { }
 
     public CasualHandleBars(String handleBars) {
         this.handleBars = handleBars;

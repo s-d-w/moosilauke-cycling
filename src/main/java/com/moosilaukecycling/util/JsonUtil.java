@@ -25,7 +25,7 @@ public class JsonUtil {
         return MAPPER.writeValueAsString(object);
     }
 
-    private static <T> T fromJsonString(String jsonBody, Class<T> clazz) throws IOException {
+    public static <T> T fromJsonString(String jsonBody, Class<T> clazz) throws IOException {
         return MAPPER.readValue(jsonBody, clazz);
     }
 

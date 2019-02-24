@@ -17,7 +17,7 @@ public class AmericanBikePartFactory implements BikePartFactory {
             case TIME_TRIAL:
                 return new TimeTrialFrame("American Time Trial Frame");
             case CASUAL:
-                return new ComfortFrame("American Casual Frame");
+                return new CasualFrame("American Casual Frame");
             case ELECTRIC:
                 return new ElectricFrame("American Electric Frame");
             default:

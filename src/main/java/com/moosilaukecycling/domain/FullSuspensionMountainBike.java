@@ -1,11 +1,13 @@
 package com.moosilaukecycling.domain;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.moosilaukecycling.domain.bikeparts.*;
 import com.moosilaukecycling.domain.enums.BikeType;
 import com.moosilaukecycling.domain.factory.BikePartFactory;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+@JsonTypeName(value = "FullSuspensionMountainBike")
 public class FullSuspensionMountainBike extends Bike {
 
     public FullSuspensionMountainBike() { }

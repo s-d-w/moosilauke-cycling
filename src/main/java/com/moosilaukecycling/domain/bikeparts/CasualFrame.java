@@ -1,10 +1,15 @@
 package com.moosilaukecycling.domain.bikeparts;
 
-public class ComfortFrame implements Frame {
+import com.fasterxml.jackson.annotation.JsonTypeName;
+
+@JsonTypeName("CasualFrame")
+public class CasualFrame implements Frame {
 
     private String frame;
 
-    public ComfortFrame(String frame) {
+    public CasualFrame() { }
+
+    public CasualFrame(String frame) {
         this.frame = frame;
     }
 

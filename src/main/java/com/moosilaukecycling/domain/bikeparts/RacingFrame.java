@@ -1,8 +1,13 @@
 package com.moosilaukecycling.domain.bikeparts;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
+
+@JsonTypeName("RacingFrame")
 public class RacingFrame implements Frame {
 
     private String frame;
+
+    public RacingFrame() { }
 
     public RacingFrame(String frame) {
         this.frame = frame;

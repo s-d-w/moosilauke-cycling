@@ -1,8 +1,13 @@
 package com.moosilaukecycling.domain.bikeparts;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
+
+@JsonTypeName(value = "MountainBikeGroupSet")
 public class MountainBikeGroupSet implements GroupSet {
 
     private String groupSet;
+
+    public MountainBikeGroupSet() { }
 
     public MountainBikeGroupSet(String groupSet) {
         this.groupSet = groupSet;

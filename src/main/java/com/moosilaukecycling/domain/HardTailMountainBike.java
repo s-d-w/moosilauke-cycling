@@ -1,11 +1,13 @@
 package com.moosilaukecycling.domain;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.moosilaukecycling.domain.bikeparts.*;
 import com.moosilaukecycling.domain.factory.BikePartFactory;
 import com.moosilaukecycling.domain.enums.BikeType;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+@JsonTypeName(value = "HardTailMountainBike")
 public class HardTailMountainBike extends Bike {
 
     public HardTailMountainBike() { }

@@ -1,8 +1,13 @@
 package com.moosilaukecycling.domain.bikeparts;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
+
+@JsonTypeName("RacingSaddle")
 public class RacingSaddle implements Saddle {
 
     private String saddle;
+
+    public RacingSaddle() { }
 
     public RacingSaddle(String saddle) {
         this.saddle = saddle;

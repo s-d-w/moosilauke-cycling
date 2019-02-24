@@ -1,8 +1,13 @@
 package com.moosilaukecycling.domain.bikeparts;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
+
+@JsonTypeName(value = "CasualGroupSet")
 public class CasualGroupSet implements GroupSet {
 
     private String groupSet;
+
+    public CasualGroupSet() { }
 
     public CasualGroupSet(String groupSet) {
         this.groupSet = groupSet;

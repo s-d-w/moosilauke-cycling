@@ -1,5 +1,8 @@
 package com.moosilaukecycling.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.moosilaukecycling.domain.bikeparts.*;
 import com.moosilaukecycling.domain.enums.BikeType;
 import com.moosilaukecycling.domain.factory.AmericanBikePartFactory;
@@ -11,6 +14,15 @@ import java.util.UUID;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.WRAPPER_OBJECT, property = "type")
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = CasualBike.class, name = "CasualBike"),
+        @JsonSubTypes.Type(value = ElectricBike.class, name = "ElectricBike"),
+        @JsonSubTypes.Type(value = FullSuspensionMountainBike.class, name = "FullSuspensionMountainBike"),
+        @JsonSubTypes.Type(value = HardTailMountainBike.class, name = "HardTailMountainBike"),
+        @JsonSubTypes.Type(value = RoadBike.class, name = "RoadBike"),
+        @JsonSubTypes.Type(value = TimeTrialBike.class, name = "TimeTrialBike")
+})
 public abstract class Bike implements Repairable {
 
     protected UUID id;
@@ -98,6 +110,7 @@ public abstract class Bike implements Repairable {
         wheelSet = builder.wheelSet != null ? builder.wheelSet : builder.bikePartFactory.createWheelSet(bikeType);
     }
 
+    @JsonIgnore
     public List<BikePart> getBikeParts() {
         checkNotNull(frame, "Frame cannot be null.");
         checkNotNull(saddle, "Saddle cannot be null.");
