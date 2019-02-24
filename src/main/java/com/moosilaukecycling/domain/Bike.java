@@ -29,6 +29,16 @@ public abstract class Bike implements Repairable {
 
     Bike() { }
 
+    Bike(BikePartFactory bikePartFactory, BikeType bikeType) {
+        id = UUID.randomUUID();
+        this.bikeType = bikeType;
+        frame = bikePartFactory.createFrame(bikeType);
+        groupSet = bikePartFactory.createGroupSet(bikeType);
+        handleBars = bikePartFactory.createHandleBars(bikeType);
+        saddle = bikePartFactory.createSaddle(bikeType);
+        wheelSet = bikePartFactory.createWheelSet(bikeType);
+    }
+
     abstract static class Builder<T extends Builder<T>> {
 
         UUID id;

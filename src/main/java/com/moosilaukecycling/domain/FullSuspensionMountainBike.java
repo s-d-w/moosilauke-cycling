@@ -11,12 +11,7 @@ public class FullSuspensionMountainBike extends Bike {
     public FullSuspensionMountainBike() { }
 
     public FullSuspensionMountainBike(BikePartFactory bikePartFactory) {
-        bikeType = BikeType.FULL_SUSPENSION;
-        frame = bikePartFactory.createFrame(bikeType);
-        groupSet = bikePartFactory.createGroupSet(bikeType);
-        handleBars = bikePartFactory.createHandleBars(bikeType);
-        saddle = bikePartFactory.createSaddle(bikeType);
-        wheelSet = bikePartFactory.createWheelSet(bikeType);
+        super(bikePartFactory, BikeType.FULL_SUSPENSION);
     }
 
     private FullSuspensionMountainBike(Builder builder) {

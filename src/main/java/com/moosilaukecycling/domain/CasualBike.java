@@ -11,12 +11,7 @@ public class CasualBike extends Bike {
     public CasualBike() { }
 
     public CasualBike(BikePartFactory bikePartFactory) {
-        bikeType = BikeType.CASUAL;
-        frame = bikePartFactory.createFrame(bikeType);
-        groupSet = bikePartFactory.createGroupSet(bikeType);
-        handleBars = bikePartFactory.createHandleBars(bikeType);
-        saddle = bikePartFactory.createSaddle(bikeType);
-        wheelSet = bikePartFactory.createWheelSet(bikeType);
+        super(bikePartFactory, BikeType.CASUAL);
     }
 
     private CasualBike(Builder builder) {

@@ -11,12 +11,7 @@ public class TimeTrialBike extends Bike {
     public TimeTrialBike() { }
 
     public TimeTrialBike(BikePartFactory bikePartFactory) {
-        bikeType = BikeType.TIME_TRIAL;
-        frame = bikePartFactory.createFrame(bikeType);
-        groupSet = bikePartFactory.createGroupSet(bikeType);
-        handleBars = bikePartFactory.createHandleBars(bikeType);
-        saddle = bikePartFactory.createSaddle(bikeType);
-        wheelSet = bikePartFactory.createWheelSet(bikeType);
+        super(bikePartFactory, BikeType.TIME_TRIAL);
     }
 
     private TimeTrialBike(Builder builder) {

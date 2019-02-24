@@ -11,12 +11,7 @@ public class RoadBike extends Bike {
     public RoadBike() { }
 
     public RoadBike(BikePartFactory bikePartFactory) {
-        bikeType = BikeType.RACING;
-        frame = bikePartFactory.createFrame(bikeType);
-        groupSet = bikePartFactory.createGroupSet(bikeType);
-        handleBars = bikePartFactory.createHandleBars(bikeType);
-        saddle = bikePartFactory.createSaddle(bikeType);
-        wheelSet = bikePartFactory.createWheelSet(bikeType);
+        super(bikePartFactory, BikeType.RACING);
     }
 
     private RoadBike(Builder builder) {

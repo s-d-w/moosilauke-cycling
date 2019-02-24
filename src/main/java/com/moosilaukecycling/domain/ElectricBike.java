@@ -11,12 +11,7 @@ public class ElectricBike extends Bike {
     public ElectricBike() { }
 
     public ElectricBike(BikePartFactory bikePartFactory) {
-        bikeType = BikeType.ELECTRIC;
-        frame = bikePartFactory.createFrame(bikeType);
-        groupSet = bikePartFactory.createGroupSet(bikeType);
-        handleBars = bikePartFactory.createHandleBars(bikeType);
-        saddle = bikePartFactory.createSaddle(bikeType);
-        wheelSet = bikePartFactory.createWheelSet(bikeType);
+        super(bikePartFactory, BikeType.ELECTRIC);
     }
 
     private ElectricBike(Builder builder) {

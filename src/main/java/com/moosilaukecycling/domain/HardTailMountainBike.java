@@ -11,12 +11,7 @@ public class HardTailMountainBike extends Bike {
     public HardTailMountainBike() { }
 
     public HardTailMountainBike(BikePartFactory bikePartFactory) {
-        bikeType = BikeType.HARD_TAIL;
-        frame = bikePartFactory.createFrame(bikeType);
-        groupSet = bikePartFactory.createGroupSet(bikeType);
-        handleBars = bikePartFactory.createHandleBars(bikeType);
-        saddle = bikePartFactory.createSaddle(bikeType);
-        wheelSet = bikePartFactory.createWheelSet(bikeType);
+        super(bikePartFactory, BikeType.HARD_TAIL);
     }
 
     private HardTailMountainBike(Builder builder) {
