@@ -26,4 +26,9 @@ public class RacingSaddle implements Saddle {
     public void repair() {
         System.out.println("Repairing " + saddle);
     }
+
+    @Override
+    public void assemble() {
+        System.out.println("Assembling " + saddle);
+    }
 }

@@ -20,7 +20,7 @@ public class BikeCatalog {
         spanishBikeFactory = new SpanishBikeFactory();
     }
 
-    public static Bike orderBike(BikeType bikeType, BikeCountry bikeCountry) {
+    public static Bike orderBike(BikeCountry bikeCountry, BikeType bikeType) {
         switch (bikeCountry) {
             case USA:
                 return americanBikeFactory.orderBike(bikeType);

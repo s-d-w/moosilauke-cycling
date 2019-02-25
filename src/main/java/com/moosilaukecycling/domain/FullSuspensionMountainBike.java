@@ -72,4 +72,9 @@ public class FullSuspensionMountainBike extends Bike {
     public void repair() {
         getBikeParts().forEach(Repairable::repair);
     }
+
+    @Override
+    public void assemble() {
+        getBikeParts().forEach(Assemblable::assemble);
+    }
 }

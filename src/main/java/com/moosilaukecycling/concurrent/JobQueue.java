@@ -7,26 +7,26 @@ import java.io.*;
 import java.util.Deque;
 import java.util.concurrent.ConcurrentLinkedDeque;
 
-public class MessageQueue<T extends Serializable> {
+public class JobQueue {
 
     private final Deque<byte[]> deque;
 
-    public MessageQueue() {
+    public JobQueue() {
         deque = new ConcurrentLinkedDeque<>();
     }
 
-    public boolean submit(T message) throws IOException {
-        byte[] data = CompressionUtil.compress(SerializationUtils.serialize(message));
-        return deque.add(data);
+    public boolean submit(Job job) throws IOException {
+        byte[] compressedData = CompressionUtil.compress(SerializationUtils.serialize(job));
+        return deque.add(compressedData);
     }
 
-    public T getMessage() throws IOException {
+    public Job getJob() throws IOException {
         byte[] data = deque.poll();
         return data != null ? SerializationUtils.deserialize(CompressionUtil.decompress(data)) : null;
     }
 
-    public void returnMessage(T message) throws IOException {
-        byte[] data = CompressionUtil.compress(SerializationUtils.serialize(message));
+    public void returnJob(Job job) throws IOException {
+        byte[] data = CompressionUtil.compress(SerializationUtils.serialize(job));
         deque.addFirst(data);
     }
 }

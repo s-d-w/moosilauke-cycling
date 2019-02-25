@@ -26,4 +26,9 @@ public class CasualHandleBars implements HandleBars {
     public void repair() {
         System.out.println("Repairing " + handleBars);
     }
+
+    @Override
+    public void assemble() {
+        System.out.println("Assembling " + handleBars);
+    }
 }

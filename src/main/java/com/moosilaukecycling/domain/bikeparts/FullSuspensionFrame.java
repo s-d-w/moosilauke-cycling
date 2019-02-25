@@ -26,4 +26,9 @@ public class FullSuspensionFrame implements Frame {
     public void repair() {
         System.out.println("Repairing " + frame);
     }
+
+    @Override
+    public void assemble() {
+        System.out.println("Assembling " + frame);
+    }
 }

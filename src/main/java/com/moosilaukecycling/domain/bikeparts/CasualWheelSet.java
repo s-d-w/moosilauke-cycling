@@ -26,4 +26,9 @@ public class CasualWheelSet implements WheelSet {
     public void repair() {
         System.out.println("Repairing " + wheelSet);
     }
+
+    @Override
+    public void assemble() {
+        System.out.println("Assembling " + wheelSet);
+    }
 }

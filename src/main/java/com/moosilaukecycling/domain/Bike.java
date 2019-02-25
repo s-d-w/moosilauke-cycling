@@ -23,7 +23,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
         @JsonSubTypes.Type(value = RoadBike.class, name = "RoadBike"),
         @JsonSubTypes.Type(value = TimeTrialBike.class, name = "TimeTrialBike")
 })
-public abstract class Bike implements Repairable {
+public abstract class Bike implements Repairable, Assemblable {
 
     protected UUID id;
     protected String make;

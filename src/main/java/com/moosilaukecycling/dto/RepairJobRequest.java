@@ -1,15 +1,19 @@
 package com.moosilaukecycling.dto;
 
+import com.moosilaukecycling.domain.Bike;
+
 public class RepairJobRequest {
 
     private String repair;
     private String notes;
+    private Bike bike;
 
     public RepairJobRequest() { }
 
-    public RepairJobRequest(String repair, String notes) {
+    public RepairJobRequest(String repair, String notes, Bike bike) {
         this.repair = repair;
         this.notes = notes;
+        this.bike = bike;
     }
 
     public String getRepair() {
@@ -28,4 +32,11 @@ public class RepairJobRequest {
         this.notes = notes;
     }
 
+    public Bike getBike() {
+        return bike;
+    }
+
+    public void setBike(Bike bike) {
+        this.bike = bike;
+    }
 }

@@ -14,7 +14,7 @@ public class JsonUtilTests {
 
     @Test
     public void testSerializeThenDeserializeItalianTimeTrialBike() {
-        Bike bike = BikeCatalog.orderBike(BikeType.TIME_TRIAL, BikeCountry.ITALY);
+        Bike bike = BikeCatalog.orderBike(BikeCountry.ITALY, BikeType.TIME_TRIAL);
 
         String json = "";
         try {

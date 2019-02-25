@@ -12,7 +12,7 @@ public class RepairJobService {
 
     public void createRepairJob(RepairJobRequest repairJobRequest) {
         RepairJobType repairJobType = RepairJobType.valueOf(repairJobRequest.getRepair());
-        BikeShopJob job = new BikeShopRepairJob(repairJobType, repairJobRequest.getNotes());
+        BikeShopJob job = new BikeShopRepairJob(repairJobType, repairJobRequest.getNotes(), repairJobRequest.getBike());
         BikeShopJobQueue.submitJob(job);
     }
 

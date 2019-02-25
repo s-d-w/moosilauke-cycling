@@ -1,11 +1,14 @@
 package com.moosilaukecycling.concurrent;
 
+import com.google.common.collect.ImmutableMap;
 import com.google.common.util.concurrent.*;
 import com.moosilaukecycling.concurrent.worker.BikeShopWorkerFactory;
 import com.moosilaukecycling.concurrent.worker.Worker;
 import com.moosilaukecycling.concurrent.worker.WorkerFactory;
+import com.moosilaukecycling.concurrent.worker.WorkerType;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
+import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -20,11 +23,14 @@ public class BikeShopJobManager {
 
     private static WorkerFactory workerFactory;
     private static ListeningExecutorService listeningExecutor;
+    private static Map<String, WorkerType> jobClassToWorkerMap;
 
     public static void init() {
         listeningExecutor = MoreExecutors.listeningDecorator(new ThreadPoolExecutor(NUMBER_OF_THREADS, NUMBER_OF_THREADS,
                                                 0L, TimeUnit.SECONDS, new LinkedBlockingQueue<>()));
         workerFactory = new BikeShopWorkerFactory();
+        jobClassToWorkerMap = ImmutableMap.of("BikeShopAssemblyJob", WorkerType.ASSEMBLEBIKE,
+                                              "BikeShopRepairJob", WorkerType.REPAIRJOB);
         startConsumer();
     }
 
@@ -44,7 +50,12 @@ public class BikeShopJobManager {
                 MAX_SUBMITTED_THREADS.acquire();
                 Optional<BikeShopJob> jobOptional = BikeShopJobQueue.getJob();
                 if (jobOptional.isPresent()) {
-                    Worker worker = workerFactory.createWorker(jobOptional.get().getWorkerType(), workerId.getAndIncrement());
+                    WorkerType workerType = jobClassToWorkerMap.get(getSimpleClassName(jobOptional.get().getClazz()));
+                    if (workerType == null) {
+                        throw new RuntimeException("Unknown Job class to WorkerType mapping.");
+                    }
+                    Worker worker = workerFactory.createWorker(
+                            workerType, workerId.getAndIncrement(), jobOptional.get().getPayload());
                     ListenableFuture<?> future = listeningExecutor.submit(worker);
                     Futures.addCallback(future, releasePermit(), MoreExecutors.directExecutor());
                 } else {
@@ -55,6 +66,10 @@ public class BikeShopJobManager {
             }
         }
     };
+
+    private static String getSimpleClassName(String className) {
+        return className.substring(className.lastIndexOf('.') + 1);
+    }
 
     private static FutureCallback releasePermit() {
         return new FutureCallback() {

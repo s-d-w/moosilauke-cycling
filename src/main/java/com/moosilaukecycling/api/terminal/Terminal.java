@@ -22,7 +22,6 @@ public class Terminal {
         System.out.println("Enter choice, or '" + EXIT + "' to quit.");
 
         while (true) {
-
             System.out.print("> ");
             String input = "";
             try {
@@ -52,7 +51,6 @@ public class Terminal {
                     break;
                 default:
                     System.out.println("Unknown choice. Enter '" + EXIT + "' to quit.");
-
             }
         }
     }

@@ -1,6 +1,10 @@
 package com.moosilaukecycling.service;
 
 import com.moosilaukecycling.concurrent.BikeShopJobManager;
+import com.moosilaukecycling.domain.Bike;
+import com.moosilaukecycling.domain.enums.BikeCountry;
+import com.moosilaukecycling.domain.enums.BikeType;
+import com.moosilaukecycling.domain.factory.BikeCatalog;
 import com.moosilaukecycling.dto.RepairJobRequest;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -25,16 +29,19 @@ public class RepairJobServiceTests {
     }
 
     @Test
-    // just runs a bunch of jobs for up to 30 seconds
+    // just runs a bunch of jobs for up to 20 seconds
     public void testRepairJobServiceCreate() throws InterruptedException {
         Stream.generate(this::generateRepairJobRequest)
                 .limit(15L)
                 .forEach(repairJobService::createRepairJob);
 
-        sleep(30000L);
+        sleep(20000L);
     }
 
     private RepairJobRequest generateRepairJobRequest() {
-        return new RepairJobRequest("TUNEUP", "some notes");
+        /* need to create bike first, then repair by passing an ID instead of a bike
+         * this is just a quick fix for now                                         */
+        Bike bike = BikeCatalog.orderBike(BikeCountry.SPAIN, BikeType.TIME_TRIAL);
+        return new RepairJobRequest("TUNEUP", "some notes", bike);
     }
 }

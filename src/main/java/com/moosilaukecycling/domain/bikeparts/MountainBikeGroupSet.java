@@ -26,4 +26,9 @@ public class MountainBikeGroupSet implements GroupSet {
     public void repair() {
         System.out.println("Repairing " + groupSet);
     }
+
+    @Override
+    public void assemble() {
+        System.out.println("Assembling " + groupSet);
+    }
 }
