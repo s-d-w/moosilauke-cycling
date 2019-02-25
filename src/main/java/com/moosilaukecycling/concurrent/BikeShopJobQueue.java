@@ -25,7 +25,7 @@ public class BikeShopJobQueue {
             if (job != null) {
                 Class clazz = Class.forName(job.getClazz());
                 Constructor<?> constructor = clazz.getConstructor(new Class[] { byte[].class});
-                return Optional.of((BikeShopJob) constructor.newInstance(job.getPayload()));
+                return Optional.of((BikeShopJob)constructor.newInstance(job.getPayload()));
             }
             return Optional.empty();
         } catch (IOException | ClassNotFoundException | NoSuchMethodException |

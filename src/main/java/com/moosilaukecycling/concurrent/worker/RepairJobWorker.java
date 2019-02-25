@@ -1,6 +1,7 @@
 package com.moosilaukecycling.concurrent.worker;
 
 import com.moosilaukecycling.domain.Bike;
+import com.moosilaukecycling.domain.Repairable;
 import com.moosilaukecycling.exception.BikeShopJsonProcessingException;
 import com.moosilaukecycling.util.JsonUtil;
 
@@ -9,7 +10,7 @@ import java.nio.charset.StandardCharsets;
 
 public class RepairJobWorker extends Worker {
 
-    private Bike bike;
+    private Repairable repairable;
 
     public RepairJobWorker(int id, byte[] payload) {
         super(id);
@@ -20,7 +21,7 @@ public class RepairJobWorker extends Worker {
     public void run() {
         System.out.println("Starting repair job id: " + id );
         try {
-            bike.repair();
+            repairable.repair();
             Thread.sleep(5000L);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
@@ -28,10 +29,9 @@ public class RepairJobWorker extends Worker {
         System.out.println("Finished repair job id: " + id);
     }
 
-    @Override
-    protected void deserializePayload(byte[] payload) {
+    private void deserializePayload(byte[] payload) {
         try {
-            bike = JsonUtil.fromJsonString(new String(payload, StandardCharsets.UTF_8), Bike.class);
+            repairable = JsonUtil.fromJsonString(new String(payload, StandardCharsets.UTF_8), Bike.class);
         } catch (IOException e) {
             throw new BikeShopJsonProcessingException(e);
         }

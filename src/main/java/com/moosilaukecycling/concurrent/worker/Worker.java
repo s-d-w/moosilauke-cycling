@@ -12,6 +12,4 @@ public abstract class Worker implements Runnable {
         return id;
     }
 
-    protected abstract void deserializePayload(byte[] payload);
-
 }
