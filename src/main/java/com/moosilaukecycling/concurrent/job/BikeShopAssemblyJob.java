@@ -1,4 +1,4 @@
-package com.moosilaukecycling.concurrent;
+package com.moosilaukecycling.concurrent.job;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.moosilaukecycling.domain.Assemblable;
@@ -9,7 +9,7 @@ import com.moosilaukecycling.util.JsonUtil;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
-public class BikeShopAssemblyJob extends BikeShopJob {
+public class BikeShopAssemblyJob implements BikeShopJob {
 
     private Assemblable assemblable;
 
@@ -28,7 +28,7 @@ public class BikeShopAssemblyJob extends BikeShopJob {
     }
 
     @Override
-    protected String getClazz() {
+    public String getClazz() {
         return this.getClass().getName();
     }
 

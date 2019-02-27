@@ -2,6 +2,7 @@ package com.moosilaukecycling.concurrent;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.util.concurrent.*;
+import com.moosilaukecycling.concurrent.job.BikeShopJob;
 import com.moosilaukecycling.concurrent.worker.BikeShopWorkerFactory;
 import com.moosilaukecycling.concurrent.worker.Worker;
 import com.moosilaukecycling.concurrent.worker.WorkerFactory;
@@ -54,8 +55,8 @@ public class BikeShopJobManager {
                     if (workerType == null) {
                         throw new RuntimeException("Unknown Job class to WorkerType mapping.");
                     }
-                    Worker worker = workerFactory.createWorker(
-                            workerType, workerId.getAndIncrement(), jobOptional.get().getPayload());
+                    Worker worker = workerFactory.createWorker(workerType, workerId.getAndIncrement(),
+                            jobOptional.get().getPayload());
                     ListenableFuture<?> future = listeningExecutor.submit(worker);
                     Futures.addCallback(future, releasePermit(), MoreExecutors.directExecutor());
                 } else {

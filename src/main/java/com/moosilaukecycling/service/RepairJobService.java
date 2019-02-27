@@ -1,8 +1,8 @@
 package com.moosilaukecycling.service;
 
-import com.moosilaukecycling.concurrent.BikeShopJob;
+import com.moosilaukecycling.concurrent.job.BikeShopJob;
 import com.moosilaukecycling.concurrent.BikeShopJobQueue;
-import com.moosilaukecycling.concurrent.BikeShopRepairJob;
+import com.moosilaukecycling.concurrent.job.BikeShopRepairJob;
 import com.moosilaukecycling.domain.RepairJobType;
 import com.moosilaukecycling.dto.RepairJobRequest;
 

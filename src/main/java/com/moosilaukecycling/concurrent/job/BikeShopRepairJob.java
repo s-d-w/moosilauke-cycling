@@ -1,4 +1,4 @@
-package com.moosilaukecycling.concurrent;
+package com.moosilaukecycling.concurrent.job;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.moosilaukecycling.domain.Bike;
@@ -9,7 +9,7 @@ import com.moosilaukecycling.util.JsonUtil;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
-public class BikeShopRepairJob extends BikeShopJob {
+public class BikeShopRepairJob implements BikeShopJob {
 
     private RepairJobType repairJobType;
     private String notes;
@@ -56,7 +56,7 @@ public class BikeShopRepairJob extends BikeShopJob {
     }
 
     @Override
-    protected String getClazz() {
+    public String getClazz() {
         return this.getClass().getName();
     }
 

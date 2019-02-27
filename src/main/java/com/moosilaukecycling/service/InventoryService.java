@@ -1,6 +1,6 @@
 package com.moosilaukecycling.service;
 
-import com.moosilaukecycling.concurrent.BikeShopAssemblyJob;
+import com.moosilaukecycling.concurrent.job.BikeShopAssemblyJob;
 import com.moosilaukecycling.concurrent.BikeShopJobQueue;
 import com.moosilaukecycling.domain.Bike;
 import com.moosilaukecycling.domain.enums.BikeCountry;
